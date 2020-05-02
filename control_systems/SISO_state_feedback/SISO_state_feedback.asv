@@ -1,0 +1,19 @@
+clc; clear;
+
+% declare SISO system
+A = [0  1  0  0;
+     0  0 -1  0;
+     0  0  0  1;
+     0  0  5  0]; 
+B = [0; 1; 0; 2];
+C = [1  0  0  0];
+
+lamb_A = eig(A);            % eigenvalues of A
+lamb_T = [-10 -20 -30 -40]; % desired closed-loop eigenvalues
+
+% Sylvester method
+[ K, lamb_E ] = sylvester_method( A, B, lamb_T );
+fprintf('state-feedback gains      K = [%.2f', K, ']'); 
+% 
+% fprintf('%.2f\n', K); fprintf(']\n');
+% fprintf('closed-loop eigenvalue lamb = ['); fprintf('%.2f\n', lamb_E); fprintf(']\n');
