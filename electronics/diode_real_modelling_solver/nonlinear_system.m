@@ -1,4 +1,4 @@
-function F = diode_function(x, par)
+function F = nonlinear_system(x, par)
 E   = par(1);
 R   = par(2);
 I_S = par(3);
