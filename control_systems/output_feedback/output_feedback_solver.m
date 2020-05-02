@@ -17,7 +17,7 @@ options                   = sdpsettings('solver','lmilab','verbose',2);
 options.lmilab.maxiter    = 100;
 options.lmilab.feasradius = 1e5;
 
-% solve factibility problem
+% solve feasibility problem
 solution = solvesdp(LMIS,[],options);
 K        = double(Y)*double(M)^-1;
 lamb_T   = eig( A+B*K*C );
