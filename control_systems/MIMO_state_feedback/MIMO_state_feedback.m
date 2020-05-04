@@ -15,6 +15,9 @@ lamb_T = [-2 -3 -4]; % desired closed-loop eigenvalues
 % Moore method
 [ K, lamb_E ] = moore_method( A, B, lamb_T );
 
+% cyclic method
+[ K, lamb_E ] = moore_method( A, B, lamb_T );
+
 % print result
 fprintf('K =\n');
 fprintf('%s \n', sprintf([repmat(' %.2f  ', 1,size(K,2)) '\n'],K));

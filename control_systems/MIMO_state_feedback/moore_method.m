@@ -14,4 +14,3 @@ end
 % since w_i could be different then v_i are not unique, impacting on system dynamics
 K = W/V;    % calculate (not-unique) gain matrix
 lamb_E = eig( A+B*K );
-end
