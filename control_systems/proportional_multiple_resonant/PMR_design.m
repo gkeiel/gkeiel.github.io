@@ -23,4 +23,4 @@ R_L = 6.58;      % resistor of non-linear load
 [ pmr_tf, cl_tf, id_tf ] = get_tf( pmr, agm, K, m );
 
 % plot simulated output and frequency responses
-[ y ] = results( V, f, pmr_tf, cl_tf, id_tf, R_L  );
+[ r, v_o, i_o, t ] = results( V, f, pmr_tf, cl_tf, id_tf, R_L  );

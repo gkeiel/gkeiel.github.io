@@ -1,4 +1,4 @@
-function [y] = results( V, f, pmr_tf, cl_tf, id_tf, R_L ) 
+function [ r, v_o, i_o, t ] = results( V, f, pmr_tf, cl_tf, id_tf, R_L ) 
 
 fs = 10000;        % sampling frequency
 dt = 1/fs;         % seconds per sample
@@ -32,13 +32,13 @@ i11 = -I_11*sqrt(2)*sin( 11*2*pi*f*t );
 [y11,t] = lsim( id_tf,i11,t );
 
 % output voltage and current
-y      = y1 +y3 +y5 +y7 +y9 +y11;
-i      = i1 +i3 +i5 +i7 +i9 +i11;
+v_o     = y1 +y3 +y5 +y7 +y9 +y11;
+i_o     = i1 +i3 +i5 +i7 +i9 +i11;
 
 % plot reference and output
 figure(1)
-plot(t,r,t,y,t,i)
-legend('r(t) [V]','y(t) [V]','i_d(t) [A]');
+plot(t,r,t,v_o,t,i_o)
+legend('r(t) [V]','v_o(t) [V]','i_o(t) [A]');
 xlabel('Time (s)'); ylabel('Amplitude');
 
 % PMR controller frequency response
