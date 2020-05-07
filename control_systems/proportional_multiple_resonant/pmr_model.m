@@ -1,6 +1,6 @@
 function [ pmr ] = pmr_model( f, m, xi )
 
-% resonant modes model
+% resonant controller model
 A_r = [];
 B_r = [];
 for i = 1:m
@@ -17,4 +17,4 @@ for i = 1:m
     B_r = [B_r; B_aux];
 end
 
-pmr = struct('A_r', A_r, 'B_r',B_r);
+pmr = struct('A_r', A_r, 'B_r', B_r);

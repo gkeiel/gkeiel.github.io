@@ -5,11 +5,10 @@ Kpwm = 1;
 Rlf  = 0.2;
 Lf   = 0.001;
 Cf   = 0.00002;
-Y    = 1/R_L;
 
 % UPS model
 A = [-(Rlf/Lf) -1/Lf;
-      1/Cf     -Y/Cf];
+      1/Cf     -1/(R_L*Cf)];
 B = [Kpwm/Lf; 0];
 C = [0 1];
 D = 0;
