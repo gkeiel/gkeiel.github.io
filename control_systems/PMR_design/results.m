@@ -1,4 +1,4 @@
-function [ r, v_o_l, i_o_l, v_o_nl, i_o_nl, t ] = results( V, f, pmr_tf, cl_tf, id_tf, R_L ) 
+function [ r, v_o_l, i_o_l, v_o_nl, i_o_nl, t ] = results( V, f, pmr_tf, cl_tf, id_tf, nld ) 
 
 fs = 10000;        % sampling frequency
 dt = 1/fs;         % seconds per sample
@@ -9,22 +9,13 @@ t  = 0:dt:Tf-dt;   % time vector
 r      = V*sqrt(2)*sin( 2*pi*f*t );
 [y1,t] = lsim( cl_tf,r,t );
 
-% disturbance current (non-linear load current MAGNITUDE and PHASE harmonics)
-% note: obtained from open-loop response to reference voltage.
-I_1  = V/R_L;
-I_3  = 0.86*(V/R_L);
-I_5  = 0.62*(V/R_L);
-I_7  = 0.35*(V/R_L);
-I_9  = 0.12*(V/R_L);
-I_11 = 0.04*(V/R_L);
-i1  =  I_1*sqrt(2)*sin( 2*pi*f*t );
-i3  = -I_3*sqrt(2)*sin( 3*2*pi*f*t );
-i5  =  I_5*sqrt(2)*sin( 5*2*pi*f*t );
-i7  = -I_7*sqrt(2)*sin( 7*2*pi*f*t );
-i9  =  I_9*sqrt(2)*sin( 9*2*pi*f*t );
-i11 = -I_11*sqrt(2)*sin( 11*2*pi*f*t );
-
 % response to disturbance input
+i1  =  nld.I_1*sqrt(2)*sin( 2*pi*f*t );
+i3  = -nld.I_3*sqrt(2)*sin( 3*2*pi*f*t );
+i5  =  nld.I_5*sqrt(2)*sin( 5*2*pi*f*t );
+i7  = -nld.I_7*sqrt(2)*sin( 7*2*pi*f*t );
+i9  =  nld.I_9*sqrt(2)*sin( 9*2*pi*f*t );
+i11 = -nld.I_11*sqrt(2)*sin( 11*2*pi*f*t );
 [y3,t]  = lsim( id_tf,i3,t );
 [y5,t]  = lsim( id_tf,i5,t );
 [y7,t]  = lsim( id_tf,i7,t );

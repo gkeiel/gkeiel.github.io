@@ -9,20 +9,23 @@ sig = input('poles minimum real part constraint: ');
 % UPS parameters
 V   = 127;       % reference RMS voltage
 f   = 50;        % reference frequency
-R_L = 6.58;      % resistor of non-linear load 
+
+% non-linear load model
+R_L = 6.58;                     % resistor 
+[ nld ] = load_model( V,R_L );  % harmonics of current
 
 % import UPS model, PMR and build augmented model
 [ ups ] = ups_model( R_L );
 [ pmr ] = pmr_model( f, m, xi );
 [ agm ] = agm_model( ups, pmr, m );
 
-% compute state-feedback matrix K for pole assignment
+% compute state-feedback matrix K for pole assignment (Kautsky's algorithm)
 eig_l = -sig*linspace(1,10*(m+2),2*m+2);
-[ K ] = place(agm.A_a,-agm.B_a,eig_l)            % Kautsky's algorithm 
-[ K,] = moore_method( agm.A_a,agm.B_a,eig_l )    % Moore's eigenstrucutre algorithm (SISO system)
+[ K ] = place(agm.A_a,-agm.B_a,eig_l);
+fprintf('K = [ %s] \n', sprintf('%.3f ', K));
 
 % PMR controller and closed-loop transfer functions
 [ pmr_tf, cl_tf, id_tf ] = get_tf( pmr, agm, K, m );
 
 % plot simulated output and frequency responses
-[ r, v_o_l, i_o_l, v_o_nl, i_o_nl, t ] = results( V, f, pmr_tf, cl_tf, id_tf, R_L  );
+[ r, v_o_l, i_o_l, v_o_nl, i_o_nl, t ] = results( V, f, pmr_tf, cl_tf, id_tf, nld  );
