@@ -18,7 +18,8 @@ R_L = 6.58;      % resistor of non-linear load
 
 % compute state-feedback matrix K for pole assignment
 eig_l = -sig*linspace(1,10*(m+2),2*m+2);
-K     = place(agm.A_a,-agm.B_a,eig_l);
+[ K ] = place(agm.A_a,-agm.B_a,eig_l)            % Kautsky's algorithm 
+[ K,] = moore_method( agm.A_a,agm.B_a,eig_l )    % Moore's eigenstrucutre algorithm (SISO system)
 
 % PMR controller and closed-loop transfer functions
 [ pmr_tf, cl_tf, id_tf ] = get_tf( pmr, agm, K, m );
