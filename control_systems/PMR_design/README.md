@@ -1,0 +1,3 @@
+# proportional_multiple_resonant_design
+
+A code to compute proportional_multiple_resonant (PMR) controller and current feedback gain in order to ensure UPS stability and performance. PMR and current gains tunned by means of pole placement. Output to linear and non-linear load are plotted.
