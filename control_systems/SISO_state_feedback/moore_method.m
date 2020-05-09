@@ -1,7 +1,7 @@
 function [ K, lamb_E ] = moore_method( A, B, lamb_T )
 
 n = length(A);
-W = ones( 1,n );
+W = ones( 1,n ); % particular entry vector for SISO problem
 I = eye( n );
 V = [];
 

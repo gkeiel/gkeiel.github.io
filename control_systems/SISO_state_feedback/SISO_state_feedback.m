@@ -16,4 +16,4 @@ lamb_T = [-10 -20 -30 -40]; % desired closed-loop eigenvalues
 
 % print result
 fprintf('K           = [ %s] \n', sprintf('%.2f ', K));
-fprintf('eigenvalues = [ %s] \n', sprintf('%.2f ', lamb_T));
+fprintf('eigenvalues = [ %s] \n', sprintf('%.2f ', lamb_E));
