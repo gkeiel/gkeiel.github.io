@@ -14,7 +14,7 @@ Cc = [0 1];
 Dc = 0;
 Ec = [0;  -1/Cf];
 
-% UPS discrete-time model (Euler-forward)
+% UPS discrete-time model (Euler-forward discretization)
 T = 1/fs;
 I = eye(2);
 A = I +T*Ac;
