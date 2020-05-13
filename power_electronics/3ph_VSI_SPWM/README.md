@@ -1,0 +1,3 @@
+# 3ph_VSI_SPWM
+
+Circuit schematic of a 3-phase voltage source inverter (VSI) with Sinusoidal Pulse Width Modulation (SPWM) feeding an alternate current (AC) motor. Improved with third harmonic injection technique, allowing for better inverter utilization before overmodulation occurs. Output frequency (f_s) and fundamental voltage (V_1) easily adjustable from carrier wave frequency (f_c) and modulation index (M), this one limited to 1,15.
