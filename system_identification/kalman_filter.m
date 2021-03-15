@@ -1,34 +1,34 @@
-clc; clear;
+function [ x, y, K ] = kalman_filter_function( sysd, u, z, t, x_0, P_0, R, Q )
 
-% declare system
-% dx(t) = Ax(t) +Bu(t) +Ew(t)
-%  y(t) = Cx(t) +v(t)
-A = [-1 0;
-     0  -10];
-B = [1; 0];
-C = [1  0];
-D = 0;
-
-% simulate measured system
-Ts  = 0.01;
-Tf  = 10;
-t   = 0:Ts:Tf;
-sys = ss(A,B,C,D);
-h   = step( sys,t );
-z   = h' +0.2*rand( 1,length(t) );
-
-% discrete-time system equivalent
-% x(k+1) = Fx(k) +Bu(k) +Gw(k)
-%   z(k) = Hx(k) +v(k)
-sysd = c2d( sys,Ts,'zoh' );
+% discrete-time model
 F = sysd.a;
-B = sysd.b;
-G = 0.1*ones( 2,1 );
+G = sysd.b(:,1);
 H = sysd.c;
+J = sysd.b(:,2:end);
 
-[ x ] = kalman_filter_function( F, G, H, B, Ts )
+% initialization
+i = 1;
+k = i+1;
+x = x_0;                 
+P = P_0;
+I = diag( ones(length(F),1) );
 
-% state evolution
-figure(1)
-plot( x,t );
-xlabel('time (s)'); ylabel('amplitude'); grid on;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% kalman filter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+for n = 1:length(t)-1
+
+    % 1. prediction
+    x(:,k) = F*x(:,k-1) +G*u(k);                % 'a priori' predicted state
+    P      = F*P*F' +J*Q*J';                    % 'a priori' predicted covariance
+
+    % 2. correction
+    K      = P*H'*inv( H*P*H' +R );             % compute optimal gain   
+    e(k)   = z(k) -H*x(:,k);                    % measurement residual
+    x(:,k) = x(:,k) +K*e(k);                    % 'a posteriori' state estimative 
+    P      = (I -K*H)*P;                        % 'a posteriori' covariance
+    
+    y(k)   = H*x(:,k);                          % estimated output
+    k      = k +1;
+end
+
+x = transpose(x);
+end
