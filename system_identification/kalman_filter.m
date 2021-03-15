@@ -1,4 +1,4 @@
-function [ x, y, K ] = kalman_filter_function( sysd, u, z, t, x_0, P_0, R, Q )
+function [ x, y, K ] = kalman_filter( sysd, u, z, t, x_0, P_0, R, Q )
 
 % discrete-time model
 F = sysd.a;

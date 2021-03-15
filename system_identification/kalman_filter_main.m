@@ -8,7 +8,7 @@ clc; clear; close all;
 % discrete-time model equivalent
 % x(k+1) = Fx(k) +Gu(k) +Jw(k)
 %   z(k) = Hx(k) +v(k)
-T        = 1/10000;
+T        = 1/5000;
 sysd     = c2d( sys,T,'zoh' );
 
 % define input and disturbance signals
@@ -26,7 +26,7 @@ z        = z +v;
 % optimal gain design
 x_0 = ones( length(sys.A),1 );          % initial condition
 P_0 = diag( ones( length(sys.A),1 ) );  % initial P
-[ x, y, K ] = kalman_filter_function( sysd, u, z, t, x_0, P_0, R, Q );
+[ x, y, K ] = kalman_filter( sysd, u, z, t, x_0, P_0, R, Q );
 
 % simulation results
 results
