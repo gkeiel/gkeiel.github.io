@@ -1,4 +1,4 @@
-function [ x, y, K ] = kalman_filter( sysd, u, z, t, x_0, P_0, R, Q )
+function [ x, y, K ] = kalman_filter( sysd, u, w, z, t, x_0, P_0, R, Q )
 
 % discrete-time model
 F = sysd.a;
@@ -7,8 +7,7 @@ H = sysd.c;
 J = sysd.b(:,2:end);
 
 % initialization
-i = 1;
-k = i+1;
+k = 1 +1;
 x = x_0;                 
 P = P_0;
 I = diag( ones(length(F),1) );
@@ -17,7 +16,7 @@ I = diag( ones(length(F),1) );
 for n = 1:length(t)-1
 
     % 1. prediction
-    x(:,k) = F*x(:,k-1) +G*u(k);                % 'a priori' predicted state
+    x(:,k) = F*x(:,k-1) +G*u(k-1) +J*w(:,k-1);  % 'a priori' predicted state
     P      = F*P*F' +J*Q*J';                    % 'a priori' predicted covariance
 
     % 2. correction

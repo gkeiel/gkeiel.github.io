@@ -9,7 +9,7 @@ D = 0;
 
 lamb_A = eig(A);      % eigenvalues of A
 
-% stabilizing output feedback solver
+% stabilizing output feedback gain matrix
 [ K, lamb_T ] = output_feedback_solver( A, B, C );
 
 % print result
