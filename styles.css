@@ -76,6 +76,48 @@ ul li {
   margin-bottom: 25px;
 }
 
+/* Contact */
+#contact {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#contact h2 {
+  font-size: 1.8rem;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+#contact p {
+  margin-bottom: 20px;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-links a {
+  color: #2980b9;
+  font-size: 1rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-links a:hover {
+  text-decoration: underline;
+}
+
+.contact-links i {
+  font-size: 1.2rem;
+}
+
+
+
 /* Footer */
 footer {
   text-align: center;
