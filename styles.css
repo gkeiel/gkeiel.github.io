@@ -60,11 +60,29 @@ a:hover {
 
 /* Images */
 img {
-  max-width: 100%;
+  display: block;       /* permite margin auto funcionar */
+  margin: 10px auto;    /* centraliza horizontalmente */
+  max-width: 80%;
   height: auto;
-  border: 1px solid #ccc;
   margin-top: 10px;
   border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.gallery {
+  display: flex;            /* imagens lado a lado */
+  justify-content: center;  /* centraliza horizontalmente */
+  gap: 10px;                /* espaçamento entre imagens */
+  flex-wrap: wrap;          /* quebra em telas pequenas */
+  margin-top: 10px;         /* distância do texto acima */
+}
+
+.gallery img {
+  flex: 0 1 auto;           /* imagens ocupam espaço igual, mínimo de 200px */
+  max-width: 250px;         /* evita que fiquem muito grandes */
+  height: auto;             /* mantém proporção */
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 /* Project list */
